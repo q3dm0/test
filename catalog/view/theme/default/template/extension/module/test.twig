@@ -1,0 +1,85 @@
+<h3>Новинки</h3>
+<div class="row">
+ {% for month in latest_month %}
+  <div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition">
+      <div class="image"><a href="{{ month.href }}"><img src="{{ month.thumb }}" alt="{{ month.name }}" title="{{ month.name }}" class="img-responsive" /></a></div>
+      <div class="caption">
+        <h4><a href="{{ month.href }}">{{ month.name }}</a></h4>
+        <p>{{ month.description }}</p>
+        {% if month.rating %}
+        <div class="rating">
+          {% for i in 5 %}
+          {% if month.rating < i %}
+          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+          {% else %}
+          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+          {% endif %}
+          {% endfor %}
+        </div>
+        {% endif %}
+        {% if month.price %}
+        <p class="price">
+          {% if not month.special %}
+          {{ month.price }}
+          {% else %}
+          <span class="price-new">{{ month.special }}</span> <span class="price-old">{{ month.price }}</span>
+          {% endif %}
+          {% if month.tax %}
+          <span class="price-tax">{{ text_tax }} {{ month.tax }}</span>
+          {% endif %}
+        </p>
+        {% endif %}
+      </div>
+      <div class="button-group">
+        <button type="button" onclick="cart.add('{{ month.product_id }}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span></button>
+        <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ month.product_id }}');"><i class="fa fa-heart"></i></button>
+        <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ month.product_id }}');"><i class="fa fa-exchange"></i></button>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<h3>Ликвидация</h3>
+<div class="row">
+ {% for uses in kick_ass_if_you_use %}
+  <div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition">
+      <div class="image"><a href="{{ uses.href }}"><img src="{{ uses.thumb }}" alt="{{ uses.name }}" title="{{ uses.name }}" class="img-responsive" /></a></div>
+      <div class="caption">
+        <h4><a href="{{ uses.href }}">{{ uses.name }}</a></h4>
+        <p>{{ uses.description }}</p>
+        {% if uses.rating %}
+        <div class="rating">
+          {% for i in 5 %}
+          {% if uses.rating < i %}
+          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+          {% else %}
+          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+          {% endif %}
+          {% endfor %}
+        </div>
+        {% endif %}
+        {% if uses.price %}
+        <p class="price">
+          {% if not uses.special %}
+          {{ uses.price }}
+          {% else %}
+          <span class="price-new">{{ uses.special }}</span> <span class="price-old">{{ uses.price }}</span>
+          {% endif %}
+          {% if uses.tax %}
+          <span class="price-tax">{{ text_tax }} {{ uses.tax }}</span>
+          {% endif %}
+        </p>
+        {% endif %}
+      </div>
+      <div class="button-group">
+        <button type="button" onclick="cart.add('{{ uses.product_id }}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span></button>
+        <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ uses.product_id }}');"><i class="fa fa-heart"></i></button>
+        <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ uses.product_id }}');"><i class="fa fa-exchange"></i></button>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
